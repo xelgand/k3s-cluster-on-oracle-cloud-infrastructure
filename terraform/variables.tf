@@ -14,9 +14,9 @@ variable "private_key_path" {
 }
 
 variable "region" {
-  description = "The region to connect to. Default: eu-frankfurt-1"
+  description = "The region to connect to. Default: eu-marseille-1"
   type        = string
-  default     = "eu-frankfurt-1"
+  default     = "eu-marseille-1"
 }
 
 variable "tenancy_ocid" {
