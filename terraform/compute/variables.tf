@@ -50,13 +50,20 @@ sudo apt-get update
 EOT
 }
 
+variable "ubuntu_image_ocid" {
+  // https://docs.oracle.com/en-us/iaas/images/ubuntu-2204/
+  description = "OCID of the Ubuntu image for your region"
+  type        = string
+  // Canonical-Ubuntu-22.04-aarch64-2022.06.16-0
+  default = "ocid1.image.oc1.eu-marseille-1.aaaaaaaaladulvn5fa42vbtqrszvs2javuye4w2k4c72y5wfqfz666gqalzq"
+}
+
 locals {
   server_instance_config = {
-    shape_id = "VM.Standard.A1.Flex"
-    ocpus    = 2
-    ram      = 12
-    // Canonical-Ubuntu-20.04-aarch64-2021.12.01-0
-    source_id   = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaaerzsdjk2ahjgfgf2zxtxtnpl3n3ew6qse2g2lxnnumxui7hsmsja"
+    shape_id    = "VM.Standard.A1.Flex"
+    ocpus       = 2
+    ram         = 12
+    source_id   = var.ubuntu_image_ocid
     source_type = "image"
     server_ip_1 = "10.0.0.11"
     server_ip_2 = "10.0.0.12"
@@ -67,11 +74,10 @@ locals {
     }
   }
   worker_instance_config = {
-    shape_id = "VM.Standard.E2.1.Micro"
-    ocpus    = 1
-    ram      = 1
-    // Canonical-Ubuntu-20.04-aarch64-2021.12.01-0
-    source_id   = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaadlurdwl77zh7l5dlngngxjormr3xvqvapiaiv6gbuffo6dzfu6la"
+    shape_id    = "VM.Standard.E2.1.Micro"
+    ocpus       = 1
+    ram         = 1
+    source_id   = var.ubuntu_image_ocid
     source_type = "image"
     worker_ip_0 = "10.0.0.21"
     worker_ip_1 = "10.0.0.22"
