@@ -50,12 +50,20 @@ sudo apt-get update
 EOT
 }
 
-variable "ubuntu_image_ocid" {
-  // https://docs.oracle.com/en-us/iaas/images/ubuntu-2204/
+variable "ubuntu_arm64_image_ocid" {
+  // https://docs.oracle.com/en-us/iaas/images/ubuntu-2004/
   description = "OCID of the Ubuntu image for your region"
   type        = string
-  // Canonical-Ubuntu-22.04-aarch64-2022.06.16-0
-  default = "ocid1.image.oc1.eu-marseille-1.aaaaaaaaladulvn5fa42vbtqrszvs2javuye4w2k4c72y5wfqfz666gqalzq"
+  // Canonical-Ubuntu-20.04-aarch64-2022.06.15-0
+  default = "ocid1.image.oc1.eu-marseille-1.aaaaaaaairgsquqngjrork2fhvgfcqwaek7kmioprn54rwre7o5xquemorva"
+}
+
+variable "ubuntu_x86_64_image_ocid" {
+  // https://docs.oracle.com/en-us/iaas/images/ubuntu-2004/
+  description = "OCID of the Ubuntu image for your region"
+  type        = string
+  // Canonical-Ubuntu-20.04-aarch64-2022.06.15-0
+  default = "ocid1.image.oc1.eu-marseille-1.aaaaaaaatfjfr52yoih7bv6hzhfv72hg6rqgl74a7ilt24evgoizlxd3v56a"
 }
 
 locals {
@@ -63,7 +71,7 @@ locals {
     shape_id    = "VM.Standard.A1.Flex"
     ocpus       = 2
     ram         = 12
-    source_id   = var.ubuntu_image_ocid
+    source_id   = var.ubuntu_arm64_image_ocid
     source_type = "image"
     server_ip_1 = "10.0.0.11"
     server_ip_2 = "10.0.0.12"
@@ -77,7 +85,7 @@ locals {
     shape_id    = "VM.Standard.E2.1.Micro"
     ocpus       = 1
     ram         = 1
-    source_id   = var.ubuntu_image_ocid
+    source_id   = var.ubuntu_x86_64_image_ocid
     source_type = "image"
     worker_ip_0 = "10.0.0.21"
     worker_ip_1 = "10.0.0.22"
